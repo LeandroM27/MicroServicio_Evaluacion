@@ -28,7 +28,7 @@ steps:
         echo 'Creating tag'
         tag=$(date '+%Y%m%d-%H%M')
         echo 'Building docker image'
-        docker build -t microservicio_evaluacion:${tag} .
+        docker build -t $(REPO):${tag} .
         echo 'log in to ecr repo'
         aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 438555236323.dkr.ecr.us-east-1.amazonaws.com
         echo 'pushing image'
