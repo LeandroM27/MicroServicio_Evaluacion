@@ -18,7 +18,7 @@ steps:
       dockerVersion: '17.09.0-ce'
 
   - task: AWSShellScript@1
-    displayName: 'Pull and deploy Helm Chart'
+    displayName: 'CI'
     inputs:
       awsCredentials: $(credentials)
       regionName: $(region)
@@ -30,7 +30,7 @@ steps:
         echo 'Building docker image'
         docker build -t microservicio_evaluacion:${tag} .
         echo 'log in to ecr repo'
-        aws ecr get-login --no-include-email --region $(region) --registry-ids 438555236323 > /dev/null
+        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 438555236323.dkr.ecr.us-east-1.amazonaws.com
         echo 'pushing image'
         docker push $(REPO):${tag}
   
