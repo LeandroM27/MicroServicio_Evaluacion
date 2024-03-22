@@ -1,19 +1,36 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- main
+  - main
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+variables:
+  credentials: 'aws-azure'
+  region: 'us-east-1'
+  helm-alb-uri: 'https://aws.github.io/eks-charts'
+  helm-alb-version: '1.4.1'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+steps:
+  - checkout: self  
+
+  - task: DockerInstaller@0
+    inputs:
+      dockerVersion: '17.09.0-ce'
+
+  - task: AWSShellScript@1
+    displayName: 'Pull and deploy Helm Chart'
+    inputs:
+      awsCredentials: $(credentials)
+      regionName: $(region)
+      failOnStandardError: true
+      scriptType: 'inline'
+      inlineScript: |
+        echo 'Creating tag'
+        tag=$(date '+%Y-%m-%d-%H:%M:%S')
+        echo 'Building docker image'
+        docker build -t microservicio_evaluacion:$(tag) .
+        echo 'log in to ecr repo'
+        aws ecr get-login --no-include-email --region $(region) --registry-ids 438555236323 > /dev/null
+        echo 'pushing image'
+        docker push $(REPO):$(tag)
+  
