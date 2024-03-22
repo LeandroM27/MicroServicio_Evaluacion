@@ -26,7 +26,7 @@ steps:
       scriptType: 'inline'
       inlineScript: |
         echo 'Creating tag'
-        tag=$(date '+%Y-%m-%d-%H:%M:%S')
+        tag=$(date '+%Y%m%d-%H%M')
         echo 'Building docker image'
         docker build -t microservicio_evaluacion:${tag} .
         echo 'log in to ecr repo'
