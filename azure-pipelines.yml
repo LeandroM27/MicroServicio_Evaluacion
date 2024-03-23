@@ -28,6 +28,16 @@ steps:
         sonar.projectKey=LeandroM27_MicroServicio_Evaluacion_3e6167fe-2365-463d-80b4-b24691b7c29b
         sonar.projectName=MicroServicio_Evaluacion
 
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: '17'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
+
+  - task: SonarQubeAnalyze@5
+    inputs:
+      jdkversion: 'JAVA_HOME_17_X64'
+
   - task: SonarQubePublish@5
     inputs:
       pollingTimeoutSec: '300'
