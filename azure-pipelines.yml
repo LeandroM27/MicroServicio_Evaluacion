@@ -37,7 +37,7 @@ steps:
   - task: Maven@4
     inputs:
       mavenPomFile: 'pom.xml'
-      goals: 'clean verify sonar:sonar -Dsonar.branch.name=main'
+      goals: 'clean verify sonar:sonar'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       javaHomeOption: 'JDKVersion'
@@ -47,7 +47,6 @@ steps:
       effectivePomSkip: false
       sonarQubeRunAnalysis: true
       sqMavenPluginVersionChoice: 'latest'
-
 
   - task: SonarQubePublish@5
     inputs:
