@@ -21,6 +21,7 @@ steps:
     inputs:
       SonarQube: 'sonar'
       scannerMode: 'Other'
+      extraProperties: 'sonar.projectKey=MicroServicio_Evaluacion'
 
   - task: SonarQubePublish@5
     inputs:
