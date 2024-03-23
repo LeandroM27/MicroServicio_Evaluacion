@@ -21,7 +21,12 @@ steps:
     inputs:
       SonarQube: 'sonar'
       scannerMode: 'Other'
-      extraProperties: 'sonar.projectKey=MicroServicio_Evaluacion'
+      extraProperties: |
+        # Additional properties that will be passed to the scanner, 
+        # Put one key=value per line, example:
+        # sonar.exclusions=**/*.bin
+        sonar.projectKey=LeandroM27_MicroServicio_Evaluacion_3e6167fe-2365-463d-80b4-b24691b7c29b
+        sonar.projectName=MicroServicio_Evaluacion
 
   - task: SonarQubePublish@5
     inputs:
