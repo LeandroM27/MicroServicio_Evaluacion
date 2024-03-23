@@ -17,6 +17,15 @@ steps:
     inputs:
       dockerVersion: '17.09.0-ce'
 
+  - task: SonarQubePrepare@5
+    inputs:
+      SonarQube: 'sonar'
+      scannerMode: 'Other'
+
+  - task: SonarQubePublish@5
+    inputs:
+      pollingTimeoutSec: '300'
+
   - task: AWSShellScript@1
     displayName: 'CI'
     inputs:
