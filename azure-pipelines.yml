@@ -38,8 +38,10 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        params=$(echo $SONARQUBE_SCANNER_PARAMS | jq 'if has("sonar.branch.name") then del(.["sonar.branch.name"]) else . end')
+        alter=$(echo $SONARQUBE_SCANNER_PARAMS | jq 'if has("sonar.branch.name") then del(.["sonar.branch.name"]) else . end')
+        params="{${alter}}"
         echo "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$params"
+
       displayName: 'Remove sonar.branch.name'
 
 
