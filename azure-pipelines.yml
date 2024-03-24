@@ -25,7 +25,7 @@ steps:
         # Additional properties that will be passed to the scanner, 
         # Put one key=value per line, example:
         # sonar.exclusions=**/*.bin
-        sonar.projectKey=LeandroM27_MicroServicio_Evaluacion_3e6167fe-2365-463d-80b4-b24691b7c29b
+        sonar.projectKey=LeandroM27_MicroServicio_Evaluacion_95baf30b-383d-4df8-99c1-0adc340b5ac6
         sonar.projectName=MicroServicio_Evaluacion
 
   - task: JavaToolInstaller@0
@@ -37,11 +37,9 @@ steps:
   - task: Maven@4
     inputs:
       mavenPomFile: 'pom.xml'
-      goals: 'clean verify sonar:sonar'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.17'
       mavenVersionOption: 'Default'
       mavenAuthenticateFeed: false
       effectivePomSkip: false
